@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helping Out! | Year 4 Module 7</title>
+<style>
+:root{
+ --navy:#26345c;--pink:#ff77a8;--coral:#ff927d;--yellow:#ffd45e;--mint:#79dfbd;
+ --blue:#72c9f5;--purple:#a78bfa;--orange:#ffad55;--cream:#fffaf0;
+ --shadow:0 7px 0 rgba(38,52,92,.10),0 14px 28px rgba(38,52,92,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;color:var(--navy);font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(135deg,#fff4f8,#f0faff 45%,#f4fff4);min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;color:var(--navy);font-weight:900}
+.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px clamp(14px,4vw,48px);background:#ffffffed;backdrop-filter:blur(10px);box-shadow:0 4px 18px #26345c12}
+.brand{font-weight:1000;font-size:1.05rem;letter-spacing:.4px}.brand span{color:#f05b95}
+.scorebox{background:#fff0b9;border:2px solid white;border-radius:99px;padding:9px 15px;box-shadow:0 3px 0 #f0c64d;font-weight:1000}
+.wrap{max-width:1120px;margin:auto;padding:24px 18px 60px}
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:20px;padding:clamp(22px,5vw,48px);border:4px solid white;border-radius:34px;background:linear-gradient(120deg,#ffe0ed,#fff0bd 48%,#d9f5ff);box-shadow:var(--shadow)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:#ffffff55}.hero:before{width:180px;height:180px;right:22%;top:-110px}.hero:after{width:100px;height:100px;right:-25px;bottom:-35px}
+.eyebrow{font-size:.8rem;font-weight:1000;letter-spacing:1.5px;text-transform:uppercase;color:#7556b8}
+h1{font-size:clamp(2.7rem,7vw,5rem);line-height:.92;margin:12px 0;color:#293761;text-shadow:3px 3px 0 white}
+.hero p{font-size:1.08rem;line-height:1.6;max-width:580px}.mascot{font-size:clamp(7rem,18vw,12rem);text-align:center;filter:drop-shadow(0 9px 0 #26345c12);animation:bounce 2.4s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(-13px) rotate(4deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes pop{from{transform:scale(.85);opacity:.3}to{transform:scale(1);opacity:1}}
+.btn{display:inline-block;padding:12px 19px;border-radius:16px;margin:6px 7px 5px 0;box-shadow:0 5px 0 #26345c20;transition:.15s transform}
+.btn:hover{transform:translateY(-3px)}.pink{background:var(--pink);box-shadow:0 5px 0 #df5688}.yellow{background:var(--yellow);box-shadow:0 5px 0 #e7b83e}.blue{background:var(--blue);box-shadow:0 5px 0 #45a8dc}.mint{background:var(--mint);box-shadow:0 5px 0 #45bd96}.purple{background:#c5b5ff;box-shadow:0 5px 0 #9276e5}.orange{background:#ffc17d;box-shadow:0 5px 0 #e99743}
+.nav{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}
+.nav button{background:white;border:2px solid #e8e9f4;border-radius:15px;padding:11px 14px;box-shadow:0 3px 0 #26345c0b}
+.nav button.active{background:#e9e2ff;border-color:#a78bfa;transform:translateY(-2px)}
+.section{display:none}.section.active{display:block;animation:pop .25s ease}
+.heading{margin:25px 0 15px}.heading h2{font-size:clamp(1.65rem,4vw,2.3rem);margin:0 0 5px}.heading p{margin:0;color:#697694;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:white;border:3px solid #fff;border-radius:23px;padding:19px;box-shadow:var(--shadow)}
+.tile{text-align:center}.emoji{display:block;font-size:3.4rem;margin-bottom:8px}.tile h3{margin:5px 0}.tile p{line-height:1.5}
+.tint-pink{background:#fff0f5}.tint-blue{background:#edf9ff}.tint-yellow{background:#fff8dc}.tint-mint{background:#edfff7}.tint-purple{background:#f4f0ff}
+.pill{display:inline-block;border-radius:99px;padding:6px 11px;background:#f0eaff;font-weight:900;font-size:.8rem}
+.note{padding:15px 18px;background:#fff5cf;border:2px dashed #efc64f;border-radius:18px;line-height:1.55;margin-top:15px}
+.flash{background:linear-gradient(135deg,#fff0f5,#eaf8ff);text-align:center;padding:28px}.flash .emoji{font-size:5rem}.flashword{font-size:2rem;font-weight:1000}
+.game-intro{display:flex;align-items:center;gap:12px;margin-bottom:14px}.game-intro .big{font-size:2.8rem}
+.game-area{max-width:850px;margin:auto}.game-status{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:900;margin:10px 0}
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.choice{padding:15px;background:#f1f7ff;border:3px solid #dceafa;border-radius:16px;text-align:left;transition:.15s}
+.choice:hover{background:#fff1f6;border-color:#ff9abb}.choice:disabled{cursor:default;opacity:1}
+.choice.correct{background:#e3fff2;border-color:#67d7a7}.choice.wrong{background:#ffe8ed;border-color:#ff8ca9}
+.feedback{min-height:30px;font-weight:1000;margin:12px 0;color:#5c4b9b}
+.progress{height:13px;border-radius:99px;background:#edf0f7;overflow:hidden;margin:12px 0}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow),var(--mint));transition:.3s}
+.match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.match-card{min-height:100px;border-radius:17px;background:linear-gradient(135deg,#dff5ff,#f4eaff);border:3px solid white;box-shadow:0 4px 0 #26345c13;font-size:1.05rem;padding:12px}
+.match-card.selected{outline:4px solid var(--orange);background:#fff2cc}.match-card.matched{background:#ddffed;opacity:.65}
+.sort-items{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}
+.sort-item{background:#fff;border:3px solid #e9eafa;border-radius:16px;padding:13px 16px;box-shadow:0 4px 0 #26345c12;font-size:1.1rem}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.bin{border:3px dashed #9db6d8;border-radius:20px;text-align:center;padding:15px 8px;min-height:110px;background:#f8fbff}
+.bin strong{display:block;margin-top:5px}.bin.paper{background:#eaf6ff;border-color:#75c9f5}.bin.metal{background:#f1edff;border-color:#aa94f5}.bin.plastic{background:#eafff5;border-color:#70d9b2}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.memory-card{min-height:105px;border-radius:17px;background:linear-gradient(135deg,#ffb6d0,#b9e8ff);border:3px solid white;box-shadow:0 5px 0 #26345c14;font-size:2rem}
+.memory-card.revealed,.memory-card.done{background:#fff7d7;font-size:1rem;padding:8px}
+.memory-card.done{background:#dfffee;opacity:.7}
+.video{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;background:#25345c}
+.footer{text-align:center;color:#8792a8;font-size:.85rem;margin-top:35px}
+ul,ol{line-height:1.8}.muted{color:#71809a}.hidden{display:none!important}
+@media(max-width:720px){.hero{grid-template-columns:1fr;text-align:center}.mascot{font-size:7rem}.grid{grid-template-columns:repeat(2,1fr)}.match-grid{grid-template-columns:repeat(2,1fr)}.memory-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}.bins{grid-template-columns:1fr}.memory-grid{grid-template-columns:repeat(2,1fr)}.nav button{flex:1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="brand">🌈 LITTLE <span>HELPERS</span> CLUB</div>
+ <div class="scorebox">⭐ Stars: <span id="stars">0</span></div>
+</header>
+<main class="wrap">
+<section class="hero" id="homeHero">
+ <div>
+  <div class="eyebrow">Get Smart Plus 4 · Year 4 · Module 7</div>
+  <h1>Helping<br>Out!</h1>
+  <p>Hi, superstar! 🐻‍❄️ Join the Little Helpers Club. Learn how to help others, talk about who owns things, and care for our planet. Play games and collect stars!</p>
+  <button class="btn pink" onclick="show('help')">Let's start! 🚀</button>
+  <button class="btn blue" onclick="show('manual')">How to play 📖</button>
+ </div>
+ <div class="mascot" aria-label="Friendly polar bear">🐻‍❄️</div>
+</section>
+
+<nav class="nav" aria-label="Courseware menu">
+ <button data-tab="help" class="active" onclick="show('help')">🤝 Learn</button>
+ <button data-tab="whose" onclick="show('whose')">🎒 Whose is it?</button>
+ <button data-tab="recycle" onclick="show('recycle')">♻️ Recycle</button>
+ <button data-tab="games" onclick="show('games')">🎮 Games</button>
+ <button data-tab="video" onclick="show('video')">🎬 Video</button>
+ <button data-tab="manual" onclick="show('manual')">📚 Guide</button>
+</nav>
+
+<section class="section active" id="help">
+ <div class="heading"><h2>🤝 Helping Others</h2><p>Small acts of kindness can make a BIG difference!</p></div>
+ <div class="grid">
+  <div class="card tile tint-pink"><span class="emoji">🧹</span><h3>clean the floor</h3><button class="btn pink" onclick="speak('Clean the floor')">🔊 Listen</button></div>
+  <div class="card tile tint-blue"><span class="emoji">🗑️</span><h3>take out the rubbish</h3><button class="btn blue" onclick="speak('Take out the rubbish')">🔊 Listen</button></div>
+  <div class="card tile tint-yellow"><span class="emoji">🛍️</span><h3>carry the bags</h3><button class="btn yellow" onclick="speak('Carry the bags')">🔊 Listen</button></div>
+  <div class="card tile tint-purple"><span class="emoji">🪴</span><h3>water the plants</h3><button class="btn purple" onclick="speak('Water the plants')">🔊 Listen</button></div>
+  <div class="card tile tint-mint"><span class="emoji">🍽️</span><h3>wash the dishes</h3><button class="btn mint" onclick="speak('Wash the dishes')">🔊 Listen</button></div>
+  <div class="card tile tint-pink"><span class="emoji">📚</span><h3>help a friend</h3><button class="btn pink" onclick="speak('Help a friend')">🔊 Listen</button></div>
+ </div>
+ <div class="card" style="margin-top:16px"><h3>💬 Kind words corner</h3><p><b>“Can you help me, please?”</b></p><p><b>“Yes, of course!”</b></p><button class="btn yellow" onclick="speak('Can you help me, please? Yes, of course!')">🔊 Listen to the conversation</button></div>
+</section>
+
+<section class="section" id="whose">
+ <div class="heading"><h2>🎒 Whose Is It?</h2><p>Use possessive pronouns to say who owns something.</p></div>
+ <div class="card flash"><span class="emoji">🎒</span><div class="flashword">Whose bag is this?</div><p>It is my bag. It is <b>MINE</b>.</p><button class="btn blue" onclick="speak('Whose bag is this? It is my bag. It is mine.')">🔊 Listen</button></div>
+ <div class="grid" style="margin-top:15px">
+  <div class="card tile tint-blue"><span class="emoji">👦</span><b>Ali's pencil</b><p>It is <b>his</b>.</p></div>
+  <div class="card tile tint-pink"><span class="emoji">👧</span><b>Mia's ruler</b><p>It is <b>hers</b>.</p></div>
+  <div class="card tile tint-yellow"><span class="emoji">👫</span><b>Our books</b><p>They are <b>ours</b>.</p></div>
+ </div>
+ <div class="note">💡 Remember: mine = belongs to me; yours = belongs to you; his = belongs to him; hers = belongs to her; ours = belongs to us; theirs = belongs to them.</div>
+</section>
+
+<section class="section" id="recycle">
+ <div class="heading"><h2>♻️ Let's Recycle!</h2><p>Let's keep our school, home and Earth clean.</p></div>
+ <div class="grid">
+  <div class="card tile tint-blue"><span class="emoji">📰</span><h3>Paper</h3><p>Newspapers and paper</p></div>
+  <div class="card tile tint-purple"><span class="emoji">🥫</span><h3>Metal</h3><p>Clean empty cans</p></div>
+  <div class="card tile tint-mint"><span class="emoji">🧴</span><h3>Plastic</h3><p>Clean plastic bottles</p></div>
+ </div>
+ <div class="card" style="margin-top:15px"><h3>🌍 Helpful words</h3><p><b>Everyone</b> can help. <b>Someone</b> can recycle. We can reuse things and reduce waste.</p><button class="btn mint" onclick="speak('Everyone can help. Someone can recycle. We can reuse things and reduce waste.')">🔊 Listen</button></div>
+ <div class="note">⚠️ Ask an adult before handling rubbish. Only sort clean, safe items.</div>
+</section>
+
+<section class="section" id="games">
+ <div class="heading"><h2>🎮 Game Zone!</h2><p>Choose a game, have fun and collect stars. You can play again!</p></div>
+ <div class="grid">
+  <div class="card tile tint-pink"><span class="emoji">🧩</span><h3>Game 1: Word Match</h3><p>Match each helping action to its picture.</p><button class="btn pink" onclick="startMatch()">Play game</button></div>
+  <div class="card tile tint-blue"><span class="emoji">🗑️</span><h3>Game 2: Recycle Sort</h3><p>Put each item in the correct recycling bin.</p><button class="btn blue" onclick="startSort()">Play game</button></div>
+  <div class="card tile tint-yellow"><span class="emoji">🧠</span><h3>Game 3: Memory Flip</h3><p>Find matching pairs of words and pictures.</p><button class="btn yellow" onclick="startMemory()">Play game</button></div>
+  <div class="card tile tint-purple"><span class="emoji">🏆</span><h3>Game 4: Super Quiz</h3><p>Answer questions about Module 7.</p><button class="btn purple" onclick="startQuiz()">Play game</button></div>
+ </div>
+
+ <div id="gamePanel" class="card game-area hidden" style="margin-top:18px">
+  <div class="game-intro"><div class="big" id="gameEmoji">🎮</div><div><h2 id="gameTitle" style="margin:0">Game</h2><div class="muted" id="gameDesc">Let's play!</div></div></div>
+  <div id="gameContent"></div>
+ </div>
+</section>
+
+<section class="section" id="video">
+ <div class="heading"><h2>🎬 Watch and Learn</h2><p>Watch, listen and think about how you can help others.</p></div>
+ <div class="card">
+  <iframe class="video" src="https://www.youtube-nocookie.com/embed/Ut0H5NsH_P0" title="Helping Out learning video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p class="muted">Video content is loaded from YouTube. An internet connection is required. Teacher should preview the video before the lesson.</p>
+  <button class="btn orange" onclick="speak('Think about this question. How can you help your family at home?')">🔊 Hear the question</button>
+ </div>
+</section>
+
+<section class="section" id="manual">
+ <div class="heading"><h2>📚 User Guide</h2><p>Simple instructions for pupils and teachers.</p></div>
+ <div class="card">
+  <h3>🧒 For pupils</h3>
+  <ol><li>Choose Learn, Whose is it? or Recycle to study.</li><li>Press the speaker buttons to listen to words and sentences.</li><li>Open Game Zone and choose one of the four games.</li><li>Read each instruction and complete the activity.</li><li>Collect stars and try again to improve your score!</li></ol>
+  <h3>👩‍🏫 For teachers</h3>
+  <ol><li>Open this HTML file in an updated browser such as Chrome, Edge or Firefox.</li><li>Use a projector, interactive whiteboard or pupils' devices.</li><li>Introduce the learning content before pupils play the games.</li><li>Encourage pupils to answer in complete sentences and explain their choices.</li><li>Preview the external video and check the classroom internet connection.</li></ol>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <h3>🔐 Ethical use</h3>
+  <ul><li>This courseware does not ask for or store pupils' names or personal information.</li><li>Use kind, inclusive and age-appropriate language.</li><li>Credit the textbook and any external media used.</li><li>Only use images, audio and video that are original, licensed or used with permission.</li><li>Ask an adult before handling waste or opening external websites.</li></ul>
+  <p><b>Learning reference:</b> Get Smart Plus 4, Year 4, Module 7 – Helping Out.</p>
+  <p><a href="https://www.wipo.int/copyright/en/" target="_blank" rel="noopener">World Intellectual Property Organization – Copyright information ↗</a></p>
+ </div>
+</section>
+<div class="footer">Made with 💛 for Year 4 learners · English Language · Module 7: Helping Out!</div>
+</main>
+
+<script>
+let stars=0;
+function addStars(n){stars+=n;document.getElementById('stars').textContent=stars}
+function show(id){
+ document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+ document.getElementById('homeHero').style.display=id==='home'?'grid':'none';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function speak(text){
+ if(!('speechSynthesis'in window)){alert('Audio is not supported in this browser.');return}
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';u.rate=.88;speechSynthesis.speak(u)
+}
+const panel=document.getElementById('gamePanel'),content=document.getElementById('gameContent');
+function openGame(emoji,title,desc){panel.classList.remove('hidden');document.getElementById('gameEmoji').textContent=emoji;document.getElementById('gameTitle').textContent=title;document.getElementById('gameDesc').textContent=desc;content.innerHTML='';panel.scrollIntoView({behavior:'smooth',block:'start'})}
+function sayFeedback(id,msg){const el=document.getElementById(id);if(el)el.textContent=msg}
+
+// GAME 1: match word and picture
+const pairs=[['🧹','clean the floor'],['🪴','water the plants'],['🍽️','wash the dishes'],['🛍️','carry the bags'],['🗑️','take out rubbish'],['📚','help a friend']];
+let matchFirst=null,matchDone=0,matchLock=false;
+function startMatch(){
+ openGame('🧩','Word Match','Tap one picture and its matching action word.');
+ matchFirst=null;matchDone=0;matchLock=false;
+ const cards=[];pairs.forEach((p,i)=>{cards.push({id:i,type:'pic',label:p[0]},{id:i,type:'word',label:p[1]})});
+ cards.sort(()=>Math.random()-.5);
+ content.innerHTML='<div class="game-status"><span>Pairs: <b id="matchCount">0 / 6</b></span><span>⭐ +1 star per pair</span></div><div class="match-grid" id="matchGrid"></div><p class="feedback" id="matchFeedback" aria-live="polite">Find all six pairs!</p><button class="btn yellow" onclick="startMatch()">Restart ↻</button>';
+ const grid=document.getElementById('matchGrid');
+ cards.forEach(card=>{const b=document.createElement('button');b.className='match-card';b.textContent=card.label;b.dataset.id=card.id;b.dataset.type=card.type;b.onclick=()=>chooseMatch(b);grid.appendChild(b)});
+}
+function chooseMatch(btn){
+ if(matchLock||btn.classList.contains('matched')||btn===matchFirst)return;
+ btn.classList.add('selected');
+ if(!matchFirst){matchFirst=btn;return}
+ if(matchFirst.dataset.id===btn.dataset.id&&matchFirst.dataset.type!==btn.dataset.type){
+  matchFirst.classList.remove('selected');btn.classList.remove('selected');matchFirst.classList.add('matched');btn.classList.add('matched');
+  matchDone++;addStars(1);document.getElementById('matchCount').textContent=matchDone+' / 6';
+  document.getElementById('matchFeedback').textContent='🎉 Great match! You earned a star.';
+  matchFirst=null;
+  if(matchDone===6)document.getElementById('matchFeedback').textContent='🏆 Amazing! You matched all six pairs!';
+ }else{
+  matchLock=true;document.getElementById('matchFeedback').textContent='😊 Not a match. Try another pair!';
+  const first=matchFirst;setTimeout(()=>{first.classList.remove('selected');btn.classList.remove('selected');matchFirst=null;matchLock=false},750)
+ }
+}
+
+// GAME 2: recycling sorting
+const sortData=[{e:'📰',n:'Newspaper',t:'paper'},{e:'🥫',n:'Drink can',t:'metal'},{e:'🧴',n:'Plastic bottle',t:'plastic'},{e:'📦',n:'Cardboard box',t:'paper'},{e:'🥫',n:'Food tin',t:'metal'},{e:'🧃',n:'Plastic drink bottle',t:'plastic'}];
+let sortIndex=0,sortScore=0,sortItems=[];
+function startSort(){
+ openGame('♻️','Recycle Sort','Choose the correct bin for each clean item.');
+ sortIndex=0;sortScore=0;sortItems=[...sortData].sort(()=>Math.random()-.5);renderSort();
+}
+function renderSort(){
+ if(sortIndex>=sortItems.length){
+  content.innerHTML=`<h2>🌍 Earth Hero!</h2><p>You sorted ${sortScore} out of ${sortItems.length} items correctly.</p><p>⭐ You earned ${sortScore} stars!</p><button class="btn mint" onclick="startSort()">Play again ↻</button>`;
+  return;
+ }
+ const item=sortItems[sortIndex];
+ content.innerHTML=`<div class="game-status"><span>Item ${sortIndex+1} of ${sortItems.length}</span><span>Correct: ${sortScore}</span></div><div class="flash"><div class="emoji">${item.e}</div><div class="flashword">${item.n}</div><p>Which bin does it belong in?</p></div><div class="bins"><button class="bin paper" onclick="checkSort('paper')"><span style="font-size:2rem">🗞️</span><strong>📘 PAPER</strong></button><button class="bin metal" onclick="checkSort('metal')"><span style="font-size:2rem">🥫</span><strong>🟣 METAL</strong></button><button class="bin plastic" onclick="checkSort('plastic')"><span style="font-size:2rem">🧴</span><strong>🟢 PLASTIC</strong></button></div><p class="feedback" id="sortFeedback" aria-live="polite"></p>`;
+}
+function checkSort(type){
+ const item=sortItems[sortIndex];const buttons=content.querySelectorAll('.bin');buttons.forEach(b=>b.disabled=true);
+ const good=type===item.t;
+ if(good){sortScore++;addStars(1);document.getElementById('sortFeedback').textContent='🌟 Correct! +1 star.'}
+ else document.getElementById('sortFeedback').textContent=`Good try! ${item.n} belongs in the ${item.t} bin.`;
+ const next=document.createElement('button');next.className='btn yellow';next.textContent='Next item ➜';next.onclick=()=>{sortIndex++;renderSort()};content.appendChild(next);
+}
+
+// GAME 3: memory
+const memoryPairs=[['🧹','clean the floor'],['🪴','water plants'],['🛍️','carry bags'],['🍽️','wash dishes']];
+let memDeck=[],memOpen=[],memMatched=0,memBusy=false;
+function startMemory(){
+ openGame('🧠','Memory Flip','Flip two cards. Find the matching picture and word.');
+ memDeck=[];memoryPairs.forEach((p,i)=>{memDeck.push({id:i,front:p[0]},{id:i,front:p[1]})});memDeck.sort(()=>Math.random()-.5);
+ memOpen=[];memMatched=0;memBusy=false;
+ content.innerHTML='<div class="game-status"><span>Pairs found: <b id="memCount">0 / 4</b></span><span>⭐ +1 star per pair</span></div><div class="memory-grid" id="memoryGrid"></div><p class="feedback" id="memFeedback">Find four matching pairs!</p><button class="btn yellow" onclick="startMemory()">Restart ↻</button>';
+ const grid=document.getElementById('memoryGrid');
+ memDeck.forEach((c,i)=>{const b=document.createElement('button');b.className='memory-card';b.textContent='❔';b.onclick=()=>flipMemory(i,b);grid.appendChild(b)});
+}
+function flipMemory(i,btn){
+ if(memBusy||btn.classList.contains('done')||memOpen.some(x=>x.i===i))return;
+ btn.textContent=memDeck[i].front;btn.classList.add('revealed');memOpen.push({i,btn});
+ if(memOpen.length===2){
+  memBusy=true;const [a,b]=memOpen;
+  if(memDeck[a.i].id===memDeck[b.i].id){
+   setTimeout(()=>{a.btn.classList.remove('revealed');b.btn.classList.remove('revealed');a.btn.classList.add('done');b.btn.classList.add('done');a.btn.disabled=true;b.btn.disabled=true;memMatched++;addStars(1);document.getElementById('memCount').textContent=memMatched+' / 4';document.getElementById('memFeedback').textContent='✨ Pair found!';memOpen=[];memBusy=false;if(memMatched===4)document.getElementById('memFeedback').textContent='🏆 Brilliant memory! You found every pair!'},450);
+  }else{
+   document.getElementById('memFeedback').textContent='Almost! Remember the cards and try again.';
+   setTimeout(()=>{a.btn.textContent='❔';b.btn.textContent='❔';a.btn.classList.remove('revealed');b.btn.classList.remove('revealed');memOpen=[];memBusy=false},850)
+  }
+ }
+}
+
+// GAME 4: quiz
+const quizData=[
+ {q:'Your friend drops some books. What can you say?',a:['I can help you.','Go away!','Those are mine.'],c:0,why:'A kind helper offers to help.'},
+ {q:'“This is my pencil. It is ____.”',a:['hers','mine','theirs'],c:1,why:'Mine means it belongs to me.'},
+ {q:'The ruler belongs to Sara. It is ____.',a:['his','ours','hers'],c:2,why:'Hers means it belongs to her.'},
+ {q:'Which item is made of paper?',a:['Newspaper','Drink can','Plastic bottle'],c:0,why:'A newspaper is made of paper.'},
+ {q:'Which word means “belongs to us”?',a:['theirs','ours','yours'],c:1,why:'Ours means it belongs to us.'},
+ {q:'What should you do before sorting rubbish?',a:['Ask an adult and use clean items.','Touch broken glass.','Mix everything together.'],c:0,why:'Always stay safe and ask an adult.'},
+ {q:'Choose the correct sentence.',a:['Everyone can help.','Everyone can helps.','Everyone helping can.'],c:0,why:'Use the base verb after can.'}
+];
+let quizIndex=0,quizCorrect=0,quizAnswered=false;
+function startQuiz(){openGame('🏆','Super Quiz','Choose the best answer. You can do it!');quizIndex=0;quizCorrect=0;renderQuiz()}
+function renderQuiz(){
+ quizAnswered=false;
+ if(quizIndex>=quizData.length){
+  content.innerHTML=`<div class="flash"><div class="emoji">🏆🎉</div><h2>Quiz completed!</h2><p>You got <b>${quizCorrect} out of ${quizData.length}</b> correct.</p><p>⭐ You earned ${quizCorrect} stars!</p><button class="btn purple" onclick="startQuiz()">Play again ↻</button></div>`;return;
+ }
+ const q=quizData[quizIndex];
+ content.innerHTML=`<div class="game-status"><span>Question ${quizIndex+1} of ${quizData.length}</span><span>Score: ${quizCorrect}</span></div><div class="progress"><div style="width:${quizIndex/quizData.length*100}%"></div></div><h3 style="font-size:1.35rem">${q.q}</h3><div class="choice-grid" id="quizChoices"></div><p class="feedback" id="quizFeedback" aria-live="polite"></p>`;
+ const box=document.getElementById('quizChoices');
+ q.a.forEach((a,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=String.fromCharCode(65+i)+'. '+a;b.onclick=()=>answerQuiz(i,b);box.appendChild(b)});
+}
+function answerQuiz(i,btn){
+ if(quizAnswered)return;quizAnswered=true;const q=quizData[quizIndex];
+ document.querySelectorAll('#quizChoices .choice').forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('correct')});
+ if(i===q.c){quizCorrect++;addStars(1);document.getElementById('quizFeedback').textContent='🌟 Correct! '+q.why}
+ else{btn.classList.add('wrong');document.getElementById('quizFeedback').textContent='💡 Good try! '+q.why}
+ const next=document.createElement('button');next.className='btn yellow';next.textContent=quizIndex===quizData.length-1?'See my result 🏅':'Next question ➜';next.onclick=()=>{quizIndex++;renderQuiz()};content.appendChild(next);
+}
+</script>
+</body>
+</html>
